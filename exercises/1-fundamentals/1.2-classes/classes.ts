@@ -26,7 +26,7 @@ class Producto {
   constructor(nombre: string, precio: number) {
     this.nombre = nombre;
     this.precio = precio;
-    this.disponible = true;
+    this.disponible = true; // no se hace mucho
   }
 
   // Métodos: funciones que definen el comportamiento
@@ -40,7 +40,7 @@ class Producto {
 }
 
 // Crear una instancia (objeto) a partir de la clase
-const producto1 = new Producto('Laptop', 999.99);
+const producto1 = new Producto("Televisor", 120);
 
 console.log('Instancia de clase Producto:');
 console.log(producto1);
@@ -55,13 +55,14 @@ console.log(`Disponible después del cambio: ${producto1.disponible}`);
 // 2. Constructor acortado con modificadores de acceso
 // ============================================================================
 
-// logSection('2. Constructor acortado', 'Simplificar la definición de propiedades usando el constructor');
+logSection('2. Constructor acortado', 'Simplificar la definición de propiedades usando el constructor');
 
 // La misma clase con sintaxis simplificada
 class ProductoSimplificado {
   // Los modificadores de acceso en los parámetros del constructor
   // automáticamente crean e inicializan las propiedades
   constructor(
+    // requerido indicar public / private
     public nombre: string,
     public precio: number,
     public disponible: boolean = true
@@ -76,9 +77,9 @@ class ProductoSimplificado {
 }
 
 const producto2 = new ProductoSimplificado('Smartphone', 799.99);
-// console.log('Instancia con constructor simplificado:');
-// console.log(producto2);
-// console.log(`Información: ${producto2.mostrarInfo()}`);
+console.log('Instancia con constructor simplificado:');
+console.log(producto2);
+console.log(`Información: ${producto2.mostrarInfo()}`);
 
 // ============================================================================
 // 3. Herencia de clases
@@ -92,7 +93,7 @@ class Vehiculo {
     public marca: string,
     public modelo: string,
     public año: number
-  ) {}
+  ) { }
 
   mostrarDetalles(): string {
     return `${this.marca} ${this.modelo} (${this.año})`;
@@ -112,7 +113,7 @@ class Coche extends Vehiculo {
     public numeroPuertas: number
   ) {
     // super() llama al constructor de la clase padre
-    super(marca, modelo, año);
+    super(marca, modelo, año); // para construir la clase padre
   }
 
   // Sobrescribir un método de la clase padre
@@ -129,20 +130,27 @@ class Coche extends Vehiculo {
 }
 
 const vehiculo = new Vehiculo('Honda', 'Civic', 2022);
-// console.log('Instancia de Vehiculo:');
-// console.log(vehiculo.mostrarDetalles());
+console.log('Instancia de Vehiculo:');
+console.log(vehiculo.mostrarDetalles());
 
 const miCoche = new Coche('Toyota', 'Corolla', 2023, 4);
-// console.log('\nInstancia de Coche (clase derivada):');
-// console.log(miCoche.mostrarDetalles());
-// miCoche.arrancar(); // Método heredado
-// miCoche.abrirMaletero(); // Método específico
+console.log('\nInstancia de Coche (clase derivada):');
+console.log(miCoche.mostrarDetalles());
+miCoche.arrancar(); // Método heredado
+miCoche.abrirMaletero(); // Método específico
 
 // ============================================================================
 // 4. Miembros estáticos (static)
 // ============================================================================
 
-// logSection('4. Miembros estáticos', 'Propiedades y métodos que pertenecen a la clase, no a instancias');
+logSection('4. Metodos estáticos', 'Propiedades y métodos que pertenecen a la clase, no a instancias');
+
+// llamar directamente a la clase sin necesidad de instanciar
+
+// Calculadora.sumar(1,2) -> .sumar sería el metodo estatico
+// sin metodo estatico seria: const calculadora = new Calculadora(); calculadora.sumar(1,2)
+// console.log(Calculadora.PI) // imprimir PI
+// NO se puede usar Calculadora.areaCirculo(12); necesita instanciar para usarlo
 
 class Calculadora {
   // Propiedad estática - pertenece a la clase, no a las instancias
@@ -165,32 +173,39 @@ class Calculadora {
 }
 
 // No necesitamos crear una instancia para usar miembros estáticos
-// console.log(`Valor de PI: ${Calculadora.PI}`);
-// console.log(`Suma estática: ${Calculadora.sumar(5, 3)}`);
+console.log(`Valor de PI: ${Calculadora.PI}`);
+console.log(`Suma estática: ${Calculadora.sumar(5, 3)}`);
 
 // Para métodos no estáticos, necesitamos crear una instancia
 const calc = new Calculadora();
-// console.log(`Área de círculo con radio 5: ${calc.areaCirculo(5)}`);
-// console.log(`Último resultado: ${calc.ultimoResultado}`);
+console.log(`Área de círculo con radio 5: ${calc.areaCirculo(5)}`);
+console.log(`Último resultado: ${calc.ultimoResultado}`);
 
 // ============================================================================
 // 5. Getters y Setters
 // ============================================================================
 
-// logSection('5. Getters y Setters', 'Métodos especiales para acceder o modificar propiedades');
+logSection('5. Getters y Setters', 'Métodos especiales para acceder o modificar propiedades');
 
 class Cuenta {
+  // _saldo es un atributo de la clase que inicia con _
   private _saldo: number;
 
   constructor(saldoInicial: number = 0) {
     this._saldo = saldoInicial;
   }
 
+  // cuando quiera obtener Cuenta.saldo se ejecutaria este metodo -> get saldo()
+  // console.log(new Cuenta().saldo)
+
   // Getter - accede a la propiedad como si fuera pública
   get saldo(): number {
     console.log('Getter de saldo llamado');
     return this._saldo;
   }
+
+  // cuenta.saldo = 34; // con setter
+  // cuenta.saldo(34); // si fuese una funcion
 
   // Setter - permite establecer el valor con validación
   set saldo(nuevoSaldo: number) {
@@ -224,29 +239,29 @@ class Cuenta {
 const miCuenta = new Cuenta(1000);
 
 // Usar getter
-// console.log(`Saldo actual: $${miCuenta.saldo}`);
+console.log(`Saldo actual: $${miCuenta.saldo}`);
 
 // Usar setter
 miCuenta.saldo = 1500;
-// console.log(`Nuevo saldo: $${miCuenta.saldo}`);
+console.log(`Nuevo saldo: $${miCuenta.saldo}`);
 
 // Usar métodos
-// miCuenta.depositar(500);
+miCuenta.depositar(500);
 console.log(`Saldo después de depósito: $${miCuenta.saldo}`);
 
 const retiroExitoso = miCuenta.retirar(800);
-// console.log(`Retiro ${retiroExitoso ? 'exitoso' : 'fallido'}`);
-// console.log(`Saldo final: $${miCuenta.saldo}`);
+console.log(`Retiro ${retiroExitoso ? 'exitoso' : 'fallido'}`);
+console.log(`Saldo final: $${miCuenta.saldo}`);
 
 // ============================================================================
 // 6. Clases abstractas
 // ============================================================================
 
-// logSection('6. Clases abstractas', 'Clases que no pueden ser instanciadas directamente');
+logSection('6. Clases abstractas', 'Clases que no pueden ser instanciadas directamente');
 
 // Clase abstracta - sirve como plantilla, no puede ser instanciada
 abstract class Forma {
-  constructor(protected color: string) {}
+  constructor(protected color: string) { }
 
   // Método concreto - implementación compartida
   obtenerColor(): string {
@@ -299,26 +314,26 @@ class Circulo extends Forma {
 }
 
 // No podemos instanciar una clase abstracta
-// const forma = new Forma('rojo'); // Esto daría error
+const forma = new Forma('rojo'); // Esto daría error
 
 const rectangulo = new Rectangulo('azul', 10, 5);
-// console.log(`Color del rectángulo: ${rectangulo.obtenerColor()}`);
-// console.log(`Área del rectángulo: ${rectangulo.calcularArea()}`);
+console.log(`Color del rectángulo: ${rectangulo.obtenerColor()}`);
+console.log(`Área del rectángulo: ${rectangulo.calcularArea()}`);
 
 rectangulo.redimensionar(2);
-// console.log(`Área después de redimensionar: ${rectangulo.calcularArea()}`);
+console.log(`Área después de redimensionar: ${rectangulo.calcularArea()}`);
 
 const circulo = new Circulo('verde', 7);
-// console.log(`\nÁrea del círculo: ${circulo.calcularArea().toFixed(2)}`);
+console.log(`\nÁrea del círculo: ${circulo.calcularArea().toFixed(2)}`);
 
 circulo.redimensionar(0.5);
-// console.log(`Área después de reducir: ${circulo.calcularArea().toFixed(2)}`);
+console.log(`Área después de reducir: ${circulo.calcularArea().toFixed(2)}`);
 
 // ============================================================================
 // 7. Implementación de interfaces
 // ============================================================================
 
-// logSection('7. Implementación de interfaces', 'Clases que implementan contratos definidos por interfaces');
+logSection('7. Implementación de interfaces', 'Clases que implementan contratos definidos por interfaces');
 
 // Definir una interfaz
 interface Reproducible {
@@ -335,7 +350,7 @@ class ReproductorAudio implements Reproducible {
   constructor(
     public archivo: string,
     public duracion: number
-  ) {}
+  ) { }
 
   reproducir(): void {
     this._enReproduccion = true;
@@ -364,7 +379,7 @@ class ReproductorVideo implements Reproducible {
     public archivo: string,
     public duracion: number,
     public resolucion: string
-  ) {}
+  ) { }
 
   reproducir(): void {
     console.log(`Reproduciendo video: ${this.archivo} (${this.resolucion})`);
@@ -393,11 +408,11 @@ function reproducirContenido(contenido: Reproducible): void {
 const cancion = new ReproductorAudio('musica.mp3', 180);
 const pelicula = new ReproductorVideo('pelicula.mp4', 7200, '1080p');
 
-// console.log('Reproducir audio:');
-// reproducirContenido(cancion);
+console.log('Reproducir audio:');
+reproducirContenido(cancion);
 
-// console.log('\nReproducir video:');
-// reproducirContenido(pelicula);
+console.log('\nReproducir video:');
+reproducirContenido(pelicula);
 
 // ============================================================================
 // logSection('Resumen', 'Las clases en TypeScript proporcionan una forma estructurada de organizar código y datos.');
