@@ -22,20 +22,28 @@
  */
 
 // ❌ Código sin tipos explícitos
-let username = "user123";
-let userAge = 25;
+// let username = "user123";
+// let userAge = 25;
+// let isActive = true;
+// let hobbies = ["reading", "swimming", "coding"];
+// let userCoordinates = [40.7128, -74.0060];
+// let userProfile = {
+//   id: 1,
+//   email: "user@example.com",
+//   isPremium: false
+// };
+
+// ✅ Tu código con tipos aquí (reemplaza las declaraciones anteriores)
+let username: string = "user123";
+let userAge: number = 25;
 let isActive = true;
-let hobbies = ["reading", "swimming", "coding"];
-let userCoordinates = [40.7128, -74.0060];
-let userProfile = {
+let hobbies: string[] = ["reading", "swimming", "coding"];
+let userCoordinates: number[] = [40.7128, -74.0060];
+let userProfile: { id: number, email: string, isPremium: boolean } = {
   id: 1,
   email: "user@example.com",
   isPremium: false
 };
-
-// ✅ Tu código con tipos aquí (reemplaza las declaraciones anteriores)
-// let username: string = "user123";
-// ...
 
 
 /**
@@ -45,16 +53,16 @@ let userProfile = {
  */
 
 // ❌ Función sin tipos explícitos
-function calculateTotal(price, quantity, discount) {
-  const subtotal = price * quantity;
-  const total = subtotal - (subtotal * discount / 100);
-  return total;
-}
+// function calculateTotal(price, quantity, discount) {
+//   const subtotal = price * quantity;
+//   const total = subtotal - (subtotal * discount / 100);
+//   return total;
+// }
 
 // ✅ Tu función con tipos aquí (reescribe la función completa)
-// function calculateTotal(price: number, quantity: number, discount: number): number {
-//   ...
-// }
+function calculateTotal(price: number, quantity: number, discount: number): number {
+  return 2
+}
 
 // ❌ Función tradicional sin tipos
 function formatName(firstName, lastName, includeMiddle, middleName) {
@@ -91,22 +99,39 @@ const laptop = {
 };
 
 // ✅ Define una interfaz Product y úsala para tipar el objeto
-// interface Product {
-//   ...
-// }
-// const laptop: Product = { ... };
+interface Product {
+  id: string,
+  name: string, price: number,
+  category: string,
+  inStock: boolean, specs: { cpu: string, ram: string, storage: string }
+}
+
+const laptop2: Product = {
+  id: "P001",
+  name: "MacBook Pro",
+  price: 1299.99,
+  category: "Electronics",
+  inStock: true,
+  specs: {
+    cpu: "M1 Pro",
+    ram: "16GB",
+    storage: "512GB"
+  }
+};
+
+
 
 // ❌ Otro objeto sin interfaz definida
-const currentUser = {
-  id: 1,
-  username: "johndoe",
-  email: "john@example.com",
-  preferences: {
-    theme: "dark",
-    notifications: true
-  },
-  roles: ["user", "editor"]
-};
+// const currentUser = {
+//   id: 1,
+//   username: "johndoe",
+//   email: "john@example.com",
+//   preferences: {
+//     theme: "dark",
+//     notifications: true
+//   },
+//   roles: ["user", "editor"]
+// };
 
 // ✅ Define una interfaz User y úsala para tipar el objeto
 // interface User {
@@ -122,28 +147,33 @@ const currentUser = {
  */
 
 // ✅ Crea un tipo ID que pueda ser un string o un number
-// type ID = string | number;
+type ID = string | number;
 
 // ✅ Ejemplo de uso:
-// const numericId: ID = 12345;
-// const stringId: ID = "ABC-12345";
+const numericId: ID = 12345;
+const stringId: ID = "ABC-12345";
 
 // ✅ Crea dos interfaces y una intersección
-// interface BasicAddress {
-//   ...
-// }
+interface BasicAddress {
+  address: string,
+  street: string
+  // 2 propiedades +
+}
 
-// interface ContactInfo {
-//   ...
-// }
+interface ContactInfo {
+  phone: number
+  // 2 propiedades +
+}
 
-// type CustomerInfo = BasicAddress & ContactInfo;
+type CustomerInfo = BasicAddress & ContactInfo;
 
 // ✅ Ejemplo de uso:
-// const customer: CustomerInfo = {
-//   street: "123 Main St",
-//   ...
-// };
+const customer: CustomerInfo = {
+  street: "123 Main St",
+  address: 'las magnolias 123',
+  phone: 987654321
+  // implementacion de las 4 propiedades
+};
 
 
 /**
@@ -153,16 +183,16 @@ const currentUser = {
  */
 
 // ✅ Define una función genérica firstElement
-// function firstElement<T>(array: T[]): T | undefined {
-//   ...
-// }
+function firstElement<T>(array: T[]): T | undefined {
+  return undefined
+}
 
 // ✅ Ejemplo de uso:
-// const numbers = [1, 2, 3, 4, 5];
-// const strings = ["hello", "world"];
-// console.log(firstElement(numbers)); // 1
-// console.log(firstElement(strings)); // "hello"
-// console.log(firstElement([])); // undefined
+const numbers = [1, 2, 3, 4, 5];
+const strings = ["hello", "world"];
+console.log(firstElement(numbers)); // 1
+console.log(firstElement(strings)); // "hello"
+console.log(firstElement([])); // undefined
 
 // Exporta las funciones y tipos que has creado
 export {
