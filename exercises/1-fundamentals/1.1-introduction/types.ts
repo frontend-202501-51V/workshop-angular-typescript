@@ -19,7 +19,7 @@ console.log('parámetros y valores de retorno de funciones.');
 logSection('1. Tipos primitivos', 'Los tipos de datos fundamentales en TypeScript');
 
 // String (cadena de texto)
-let nombreUsuario: string = "Ana";
+let nombreUsuario: string = "Ana"; // no TIENE TIPO??? que es un arreglo, un objeto, un string, boolean, etc?
 let apellidoUsuario: string = 'García';
 let presentacionCompleta: string = `Hola, mi nombre es ${nombreUsuario} ${apellidoUsuario}`;
 
@@ -30,9 +30,9 @@ console.log(`- presentacionCompleta: ${presentacionCompleta} (tipo: ${typeof pre
 console.log('');
 
 // Number (números, tanto enteros como decimales)
-let edadUsuario: number = 30;
+let edadUsuario: number = 30; // tipo numerico => :number
 let precioProducto: number = 19.99;
-let valorNulo: number = NaN;
+let valorNulo: number = NaN; // Not a Number
 let valorInfinito: number = Infinity;
 
 console.log('Number (numéricos):');
@@ -43,7 +43,7 @@ console.log(`- valorInfinito: ${valorInfinito} (tipo: ${typeof valorInfinito})`)
 console.log('');
 
 // Boolean (verdadero o falso)
-let usuarioActivo: boolean = true;
+let usuarioActivo: boolean = true;  // :boolean
 let tareaCompletada: boolean = false;
 
 console.log('Boolean (booleanos):');
@@ -54,83 +54,87 @@ console.log(`- tareaCompletada: ${tareaCompletada} (tipo: ${typeof tareaCompleta
 // 2. Tipos especiales
 // ============================================================================
 
-// logSection('2. Tipos especiales', 'Tipos especiales para casos particulares');
+logSection('2. Tipos especiales', 'Tipos especiales para casos particulares');
 
 // Any (cualquier tipo, evitar usar si es posible)
-let valorDinamico: any = "Esto puede ser cualquier cosa";
+let valorDinamico: any = "Esto puede ser cualquier cosa"; // mala practica, las versiones actuales de TS lo ven asi
 valorDinamico = 100; // Válido
 valorDinamico = false; // Válido
 
-// console.log('Any (cualquier tipo):');
-// console.log(`- valorDinamico: ${valorDinamico} (tipo: ${typeof valorDinamico})`);
-// console.log('  ⚠️ Evitar el uso de "any" en la medida de lo posible');
-// console.log('');
+console.log('Any (cualquier tipo):');
+console.log(`- valorDinamico: ${valorDinamico} (tipo: ${typeof valorDinamico})`);
+console.log('  ⚠️ Evitar el uso de "any" en la medida de lo posible');
+console.log('');
 
 // Unknown (desconocido, más seguro que any)
-let datoDinamico: unknown = 5;
-// console.log('Unknown (desconocido):');
-// console.log(`- datoDinamico: ${datoDinamico} (tipo: ${typeof datoDinamico})`);
-// console.log('  Para manipular un valor "unknown", primero debemos verificar su tipo:');
+let datoDinamico: unknown = 5;  // respuesta de un backend
+console.log('Unknown (desconocido):');
+console.log(`- datoDinamico: ${datoDinamico} (tipo: ${typeof datoDinamico})`);
+console.log('  Para manipular un valor "unknown", primero debemos verificar su tipo:');
 
 // Es necesario verificar el tipo antes de realizar operaciones específicas
 if (typeof datoDinamico === 'number') {
-  const resultado = datoDinamico * 2;
-  // console.log(`  Después de verificar → datoDinamico * 2 = ${resultado}`);
+  const resultado = datoDinamico * 2; // se puede  multiplicar
+  console.log(`  Después de verificar → datoDinamico * 2 = ${resultado}`);
 }
-// console.log('');
+console.log('');
 
 // Void (ausencia de valor, típicamente en funciones sin retorno)
 function saludarUsuario(): void {
-  // console.log("Hola mundo");
+  console.log("Hola mundo");
   // No hay return
 }
 
-// console.log('Void (ausencia de valor):');
-// console.log('- saludarUsuario() es una función que no retorna ningún valor');
-// console.log('  Ejecutando saludarUsuario(): ');
+console.log('Void (ausencia de valor):');
+console.log('- saludarUsuario() es una función que no retorna ningún valor');
+console.log('  Ejecutando saludarUsuario(): ');
 saludarUsuario();
-// console.log('');
+console.log('');
 
 // Null y Undefined
 let valorNull: null = null;
 let valorUndefined: undefined = undefined;
 
-// console.log('Null y Undefined:');
-// console.log(`- valorNull: ${valorNull} (tipo: ${typeof valorNull})`);
-// console.log(`- valorUndefined: ${valorUndefined} (tipo: ${typeof valorUndefined})`);
+console.log('Null y Undefined:');
+console.log(`- valorNull: ${valorNull} (tipo: ${typeof valorNull})`);
+console.log(`- valorUndefined: ${valorUndefined} (tipo: ${typeof valorUndefined})`);
 
 // ============================================================================
 // 3. Arrays y Colecciones
 // ============================================================================
 
-// logSection('3. Arrays y Colecciones', 'Estructuras para almacenar múltiples valores');
+logSection('3. Arrays y Colecciones', 'Estructuras para almacenar múltiples valores');
 
 // Array (usando la sintaxis de corchetes)
-let listaNumeros: number[] = [1, 2, 3, 4, 5];
-let listaNombres: string[] = ["Ana", "Juan", "María"];
+let listaNumeros: number[] = [1, 2, 3, 4, 5]; // arreglo de numeros
+let listaNombres: string[] = ["Ana", "Juan", "María"]; // arreglo de strings
 
-// console.log('Arrays (sintaxis de corchetes):');
-// console.log(`- listaNumeros: [${listaNumeros}] (tipo: ${typeof listaNumeros})`);
-// console.log(`- listaNombres: [${listaNombres}] (tipo: ${typeof listaNombres})`);
-// console.log('');
+console.log('Arrays (sintaxis de corchetes):');
+console.log(`- listaNumeros: [${listaNumeros}] (tipo: ${typeof listaNumeros})`);
+console.log(`- listaNombres: [${listaNombres}] (tipo: ${typeof listaNombres})`);
+// causa mucho errores en los programadores
+// typeof array !== array,      typeof array === object
+// validando el valor que sea un arreglo: array.length -> es un numero entre 0 a mas, entonces es un arreglo
+// otra forma mas actual es usando Array.isArray([1,2,3]) // booleano
+console.log('');
 
 // Array (usando la sintaxis genérica Array)
 let listaColores: Array<string> = ["rojo", "verde", "azul"];
 
-// console.log('Arrays (sintaxis genérica):');
-// console.log(`- listaColores: [${listaColores}] (tipo: ${typeof listaColores})`);
-// console.log('');
+console.log('Arrays (sintaxis genérica):');
+console.log(`- listaColores: [${listaColores}] (tipo: ${typeof listaColores})`);
+console.log('');
 
 // Tupla (array con número fijo de elementos y tipos específicos)
 let datosUsuario: [string, number, boolean] = ["admin", 123, true];
 let coordenadaGPS: [number, number] = [10.5, 20.3];
 
-// console.log('Tuplas (arrays con estructura fija):');
-// console.log(`- datosUsuario: [${datosUsuario}]`);
-// console.log(`  datosUsuario[0] (string): ${datosUsuario[0]}`);
-// console.log(`  datosUsuario[1] (number): ${datosUsuario[1]}`);
-// console.log(`  datosUsuario[2] (boolean): ${datosUsuario[2]}`);
-// console.log(`- coordenadaGPS: [${coordenadaGPS}] (latitud, longitud)`);
+console.log('Tuplas (arrays con estructura fija):');
+console.log(`- datosUsuario: [${datosUsuario}]`);
+console.log(`  datosUsuario[0] (string): ${datosUsuario[0]}`);
+console.log(`  datosUsuario[1] (number): ${datosUsuario[1]}`);
+console.log(`  datosUsuario[2] (boolean): ${datosUsuario[2]}`);
+console.log(`- coordenadaGPS: [${coordenadaGPS}] (latitud, longitud)`);
 
 // ============================================================================
 // 4. Objetos y tipos personalizados
@@ -145,9 +149,9 @@ let perfilUsuario: { nombre: string; edad: number; activo?: boolean } = {
   // La propiedad activo es opcional gracias al signo '?'
 };
 
-// console.log('Objetos con tipos definidos:');
-// console.log(`- perfilUsuario: ${JSON.stringify(perfilUsuario, null, 2)}`);
-// console.log('  La propiedad "activo" es opcional (notación con "?")');
+console.log('Objetos con tipos definidos:');
+console.log(`- perfilUsuario: ${JSON.stringify(perfilUsuario, null, 2)}`);
+console.log('  La propiedad "activo" es opcional (notación con "?")');
 
 // ============================================================================
 // 5. Enumeraciones
@@ -166,14 +170,14 @@ enum DiaSemana {
   Domingo     // 6
 }
 
-let diaActual: DiaSemana = DiaSemana.Martes;
+let diaActual: DiaSemana = DiaSemana.Miercoles;
 
-// console.log('Enumeraciones numéricas:');
-// console.log(`- diaActual: DiaSemana.Martes = ${diaActual}`);
-// console.log(`  DiaSemana.Lunes = ${DiaSemana.Lunes}`);
-// console.log(`  DiaSemana.Martes = ${DiaSemana.Martes}`);
-// console.log(`  DiaSemana.Miercoles = ${DiaSemana.Miercoles}`);
-// console.log('');
+console.log('Enumeraciones numéricas:');
+console.log(`- diaActual: DiaSemana.Martes = ${diaActual}`);
+console.log(`  DiaSemana.Lunes = ${DiaSemana.Lunes}`);
+console.log(`  DiaSemana.Martes = ${DiaSemana.Martes}`);
+console.log(`  DiaSemana.Miercoles = ${DiaSemana.Miercoles}`);
+console.log('');
 
 // Enum con valores específicos
 enum RolUsuario {
@@ -184,11 +188,11 @@ enum RolUsuario {
 
 let rolAsignado: RolUsuario = RolUsuario.Administrador;
 
-// console.log('Enumeraciones de cadena:');
-// console.log(`- rolAsignado: RolUsuario.Administrador = "${rolAsignado}"`);
-// console.log(`  RolUsuario.Usuario = "${RolUsuario.Usuario}"`);
-// console.log(`  RolUsuario.Administrador = "${RolUsuario.Administrador}"`);
-// console.log(`  RolUsuario.Editor = "${RolUsuario.Editor}"`);
+console.log('Enumeraciones de cadena:');
+console.log(`- rolAsignado: RolUsuario.Administrador = "${rolAsignado}"`);
+console.log(`  RolUsuario.Usuario = "${RolUsuario.Usuario}"`);
+console.log(`  RolUsuario.Administrador = "${RolUsuario.Administrador}"`);
+console.log(`  RolUsuario.Editor = "${RolUsuario.Editor}"`);
 
 // ============================================================================
 // 6. Unión e Intersección de tipos
@@ -198,14 +202,14 @@ let rolAsignado: RolUsuario = RolUsuario.Administrador;
 
 // Union (puede ser uno u otro tipo)
 let identificadorUsuario: string | number;
-identificadorUsuario = "abc123";  // Válido
-// console.log('Unión de tipos (string | number):');
-// console.log(`- identificadorUsuario = "${identificadorUsuario}" (tipo: ${typeof identificadorUsuario})`);
+identificadorUsuario = 'string';  // Válido
+console.log('Unión de tipos (string | number):');
+console.log(`- identificadorUsuario = "${identificadorUsuario}" (tipo: ${typeof identificadorUsuario})`);
 
-identificadorUsuario = 12345;     // Válido
-// console.log(`- identificadorUsuario = ${identificadorUsuario} (tipo: ${typeof identificadorUsuario})`);
-// console.log('  ❌ identificadorUsuario = true; // Error: no puede ser boolean');
-// console.log('');
+identificadorUsuario = true;
+console.log(`- identificadorUsuario = ${identificadorUsuario} (tipo: ${typeof identificadorUsuario})`);
+console.log('  ❌ identificadorUsuario = true; // Error: no puede ser boolean');
+console.log('');
 
 // Intersection (debe tener todas las propiedades de ambos tipos)
 type DatosEmpleado = { id: number; nombre: string };
@@ -219,32 +223,32 @@ let empleadoCompleto: FichaEmpleado = {
   telefono: "555-1234"
 };
 
-// console.log('Intersección de tipos (DatosEmpleado & DatosContacto):');
-// console.log(`- empleadoCompleto: ${JSON.stringify(empleadoCompleto, null, 2)}`);
-// console.log('  Debe contener todas las propiedades de ambos tipos');
+console.log('Intersección de tipos (DatosEmpleado & DatosContacto):');
+console.log(`- empleadoCompleto: ${JSON.stringify(empleadoCompleto, null, 2)}`);
+console.log('  Debe contener todas las propiedades de ambos tipos');
 
 // ============================================================================
 // 7. Aserciones de tipo
 // ============================================================================
 
-// logSection('7. Aserciones de tipo', 'Indicar al compilador que confíe en tu conocimiento del tipo');
+logSection('7. Aserciones de tipo', 'Indicar al compilador que confíe en tu conocimiento del tipo');
 
 // A veces necesitamos decirle al compilador que confíe en que sabemos
 // lo que estamos haciendo al convertir entre tipos
 
 let entradaTexto: unknown = "42";
 
-// console.log('Aserciones de tipo:');
-// console.log(`- entradaTexto: "${entradaTexto}" (tipo original: unknown)`);
+console.log('Aserciones de tipo:');
+console.log(`- entradaTexto: "${entradaTexto}" (tipo original: unknown)`);
 
 // Usando 'as'
-let longitudCadena = (entradaTexto as string).length;
-// console.log(`  Usando 'as': (entradaTexto as string).length = ${longitudCadena}`);
+let longitudCadena = (entradaTexto as string).includes('true');
+console.log(`  Usando 'as': (entradaTexto as string).length = ${longitudCadena}`);
 
 // Usando la sintaxis de ángulo (menos común, evitar en JSX)
-let otraLongitud = (<string>entradaTexto).length;
-// console.log(`  Usando sintaxis ángulo: (<string>entradaTexto).length = ${otraLongitud}`);
-// console.log('  ⚠️ La sintaxis de ángulo se debe evitar en archivos JSX');
+let otraLongitud = (<string>entradaTexto).toString();
+console.log(`  Usando sintaxis ángulo: (<string>entradaTexto).length = ${otraLongitud}`);
+console.log('  ⚠️ La sintaxis de ángulo se debe evitar en archivos JSX'); // es ReactJS
 
 // ============================================================================
 // 8. Inferencia de tipos
@@ -257,22 +261,24 @@ let textoInferido = "Esto es una cadena"; // inferido como string
 let numeroInferido = 42;                 // inferido como number
 let booleanoInferido = true;             // inferido como boolean
 
-// console.log('Inferencia de tipos primitivos:');
-// console.log(`- textoInferido: "${textoInferido}" (tipo inferido: ${typeof textoInferido})`);
-// console.log(`- numeroInferido: ${numeroInferido} (tipo inferido: ${typeof numeroInferido})`);
-// console.log(`- booleanoInferido: ${booleanoInferido} (tipo inferido: ${typeof booleanoInferido})`);
-// console.log('');
+// siempre deben TIPAR sus valores, SIEMPRE!!
+
+console.log('Inferencia de tipos primitivos:');
+console.log(`- textoInferido: "${textoInferido}" (tipo inferido: ${typeof textoInferido})`);
+console.log(`- numeroInferido: ${numeroInferido} (tipo inferido: ${typeof numeroInferido})`);
+console.log(`- booleanoInferido: ${booleanoInferido} (tipo inferido: ${typeof booleanoInferido})`);
+console.log('');
 
 // También funciona con arrays
 let arrayInferido = [1, 2, 3];   // inferido como number[]
 
-// console.log('Inferencia de tipos en arrays:');
-// console.log(`- arrayInferido: [${arrayInferido}] (tipo inferido: number[])`);
+console.log('Inferencia de tipos en arrays:');
+console.log(`- arrayInferido: [${arrayInferido}] (tipo inferido: number[])`);
 
 // ============================================================================
-// logSection('Resumen', 'TypeScript proporciona un sistema de tipos estático que ayuda a prevenir errores comunes');
-// console.log('✅ Archivo de tipos básicos ejecutado correctamente.');
-// console.log('='.repeat(80) + '\n');
+logSection('Resumen', 'TypeScript proporciona un sistema de tipos estático que ayuda a prevenir errores comunes');
+console.log('✅ Archivo de tipos básicos ejecutado correctamente.');
+console.log('='.repeat(80) + '\n');
 
 // Si necesitas exportar algo para TypeScript (para evitar error de archivo sin salida), usa:
 // Opcional: esto ayuda a TypeScript a tratar el archivo como un módulo sin exportar nada realmente
